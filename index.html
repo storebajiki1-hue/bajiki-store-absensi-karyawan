@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard Absensi Perusahaan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #00897b;
+      --primary-dark: #00695c;
+      --accent: #ffb300;
+      --bg: #f5f5f5;
+      --text: #212121;
+      --card-bg: #ffffff;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+    header p {
+      margin: 0.5rem 0 0 0;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+      color: var(--primary-dark);
+      margin-top: 0;
+      border-bottom: 2px solid #e0f2f1;
+      padding-bottom: 0.5rem;
+    }
+    .badge {
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+    }
+    .info-list li {
+      margin-behavior: smooth;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+    .info-list .icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: var(--primary);
+    }
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      text-shadow: none;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+    .btn-accent {
+      background-color: var(--accent);
+      color: #000;
+    }
+    .btn-accent:hover {
+      background-color: #ff9800;
+    }
+    .code-box {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      max-height: 250px;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #777;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Portal Absensi Hub - Google Apps Script</h1>
+    <p>Sistem Absensi Foto & Keterangan Terintegrasi Android</p>
+  </header>
+
+  <div class="container">
+    
+    <div class="card">
+      <h2>Status Hub Koneksi <span class="badge">AKTIF</span></h2>
+      <p>Penyimpanan database Anda berjalan di Google Spreadsheet dan diakses secara aman lewat Google Apps Script API.</p>
+      
+      <ul class="info-list">
+        <li>
+          <span class="icon">📊</span>
+          <div>
+            <strong>Sheet Terkoneksi:</strong> Absensi, Karyawan
+          </div>
+        </li>
+        <li>
+          <span class="icon">🕒</span>
+          <div>
+            <strong>Siklus Rekap Bulanan:</strong> Tanggal 7 tiap bulan s/d Tanggal 6 bulan berikutnya.
+          </div>
+        </li>
+        <li>
+          <span class="icon">⚡</span>
+          <div>
+            <strong>Batas Jam Terlambat:</strong> 08:00 (Pagi), 15:00 (Sore) dengan Toleransi 15 Menit.
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Panduan untuk Owner Perusahaan</h2>
+      <ol>
+        <li>Buka Google Spreadsheet baru atau yang sudah Anda sediakan.</li>
+        <li>Klik menu <strong>Extensions (Ekstensi)</strong> &gt; <strong>Apps Script</strong>.</li>
+        <li>Hapus seluruh kode bawaan di file <code>Code.gs</code>, lalu salin dan tempel (paste) seluruh isi file script <code>Code.gs</code> yang disediakan di aplikasi Android Anda.</li>
+        <li>Pilih fungsi <code>setupDatabase</code> di panel atas Apps Script, lalu klik tombol <strong>Run (Jalankan)</strong>. Berikan izin otorisasi spreadsheet jika diminta.</li>
+        <li>Klik tombol <strong>Deploy (Terapkan)</strong> &gt; <strong>New Deployment (Terapkan Baru)</strong> di bagian kanan atas.</li>
+        <li>Pilih tipe <code>Web App (Aplikasi Web)</code>. Atur <em>"Execute as"</em> ke <code>Me (Saya)</code> dan <em>"Who has access"</em> ke <code>Anyone (Siapa saja)</code>.</li>
+        <li>Klik Deploy, salin <strong>Web App URL</strong> yang dihasilkan, lalu masukkan URL tersebut ke setelan aplikasi Android Anda untuk mulai berkoneksi secara instan!</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Aksi & Data</h2>
+      <p>Gunakan tombol di bawah ini untuk melihat data internal.</p>
+      <a href="?action=export" target="_blank" class="btn btn-accent">Minta Ekspor Data JSON</a>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 Developer AI Studio - Aplikasi Absensi Perusahaan Terbaik.
+  </footer>
+
+</body>
+</html>
